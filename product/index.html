@@ -71,15 +71,22 @@
 
   /* 3. Reviews carousel */
   .mmdp-rev h2 { font-size: 22px; }
-  .mmdp-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; scrollbar-width: none; padding: 4px 2px; }
-  .mmdp-track::-webkit-scrollbar { display: none; }
-  .mmdp-slide { flex: 0 0 92%; scroll-snap-align: center; border: 1px solid #f0b8bd; border-radius: 12px; padding: 12px; background: #fff; }
-  .mmdp-slide img { border-radius: 8px; width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .mmdp-car { position: relative; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+  .mmdp-track { display: flex; transition: transform .35s ease; will-change: transform; }
+  .mmdp-track.drag { transition: none; }
+  .mmdp-slide { flex: 0 0 100%; padding: 0 4px; margin: 0; }
+  .mmdp-slide .in { border: 1px solid #f0b8bd; border-radius: 12px; padding: 12px; background: #fff; height: 100%; }
+  .mmdp-slide img { border-radius: 8px; width: 100%; aspect-ratio: 1; object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
   .mmdp-slide q { display: block; font-size: 15px; line-height: 1.55; margin: 14px 4px 6px; quotes: none; }
   .mmdp-slide cite { display: block; font-style: normal; font-size: 13px; font-weight: 600; margin: 0 4px 6px; }
-  .mmdp-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
-  .mmdp-dots i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--red); }
-  .mmdp-dots i.on { background: var(--red); }
+  .mmdp-arrow { position: absolute; top: 38%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); box-shadow: 0 2px 8px rgba(0,0,0,.18); cursor: pointer; display: grid; place-items: center; z-index: 2; padding: 0; }
+  .mmdp-arrow::before { content: ""; width: 9px; height: 9px; border-left: 2.5px solid var(--red); border-bottom: 2.5px solid var(--red); transform: translateX(2px) rotate(45deg); }
+  .mmdp-arrow.next::before { transform: translateX(-2px) rotate(-135deg); }
+  .mmdp-arrow.prev { left: 10px; } .mmdp-arrow.next { right: 10px; }
+  .mmdp-dots { display: flex; justify-content: center; gap: 4px; margin-top: 12px; }
+  .mmdp-dots button { width: 24px; height: 24px; border: 0; background: none; padding: 0; cursor: pointer; display: grid; place-items: center; }
+  .mmdp-dots button::before { content: ""; width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--red); box-sizing: border-box; }
+  .mmdp-dots button.on::before { background: var(--red); }
 
   /* 4. Compare */
   .mmdp-cmp h2 { font-size: 32px; font-weight: 700; text-align: center; }
@@ -122,7 +129,7 @@
   .mmdp-faq .a p { margin: 0 0 10px; }
 
   @media (min-width: 900px) {
-    .mmdp-slide { flex-basis: 46%; }
+    .mmdp-rev { max-width: 560px; }
   }
 </style>
 </head>
@@ -196,13 +203,17 @@
   <!-- 3. Real People, Real Results -->
   <section class="mmdp-sec mmdp-rev">
     <h2 class="center">Real People, Real Results</h2>
-    <div class="mmdp-track">
-      <figure class="mmdp-slide" style="margin:0"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-janet.webp" alt="Before and after: Janet S." loading="lazy"><q>“I have sensitive skin and this is the first product that doesn’t irritate me — only smooth, glowing results.”</q><cite>— Janet S.</cite></figure>
-      <figure class="mmdp-slide" style="margin:0"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-catherine.webp" alt="Before and after: Catherine R." loading="lazy"><q>“This cream makes my skin feel firmer and brighter every morning. It’s now part of my daily routine!”</q><cite>— Catherine R.</cite></figure>
-      <figure class="mmdp-slide" style="margin:0"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-alice.webp" alt="Before and after: Alice K." loading="lazy"><q>“Results that speak for themselves. My skin feels smoother, and those deep lines are a thing of the past. I’ve finally found my 'holy grail' for confidence!”</q><cite>— Alice K.</cite></figure>
-      <figure class="mmdp-slide" style="margin:0"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-linda.webp" alt="Before and after: Linda M." loading="lazy"><q>“My wrinkles around the eyes have softened so much. I finally feel confident without makeup!”</q><cite>— Linda M.</cite></figure>
+    <div class="mmdp-car">
+      <div class="mmdp-track">
+        <figure class="mmdp-slide"><div class="in"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-janet.webp" alt="Before and after: Janet S." loading="lazy"><q>“I have sensitive skin and this is the first product that doesn’t irritate me — only smooth, glowing results.”</q><cite>— Janet S.</cite></div></figure>
+        <figure class="mmdp-slide"><div class="in"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-catherine.webp" alt="Before and after: Catherine R." loading="lazy"><q>“This cream makes my skin feel firmer and brighter every morning. It’s now part of my daily routine!”</q><cite>— Catherine R.</cite></div></figure>
+        <figure class="mmdp-slide"><div class="in"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-alice.webp" alt="Before and after: Alice K." loading="lazy"><q>“Results that speak for themselves. My skin feels smoother, and those deep lines are a thing of the past. I’ve finally found my 'holy grail' for confidence!”</q><cite>— Alice K.</cite></div></figure>
+        <figure class="mmdp-slide"><div class="in"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-linda.webp" alt="Before and after: Linda M." loading="lazy"><q>“My wrinkles around the eyes have softened so much. I finally feel confident without makeup!”</q><cite>— Linda M.</cite></div></figure>
+      </div>
+      <button class="mmdp-arrow prev" type="button" aria-label="Previous review"></button>
+      <button class="mmdp-arrow next" type="button" aria-label="Next review"></button>
     </div>
-    <div class="mmdp-dots"><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="mmdp-dots"><button type="button" class="on" aria-label="Review 1"></button><button type="button" aria-label="Review 2"></button><button type="button" aria-label="Review 3"></button><button type="button" aria-label="Review 4"></button></div>
   </section>
 
   <!-- 4. See How We Compare -->
@@ -266,16 +277,40 @@
       root.querySelectorAll('.mmdp-panel').forEach(function (p) { p.hidden = p.dataset.p !== t.dataset.w; });
     });
   });
-  // Review carousel dots
-  var track = root.querySelector('.mmdp-track'), dots = root.querySelectorAll('.mmdp-dots i');
-  track.addEventListener('scroll', function () {
-    var slides = track.children, best = 0, bd = 1e9, mid = track.scrollLeft + track.clientWidth / 2;
-    for (var i = 0; i < slides.length; i++) {
-      var c = slides[i].offsetLeft - track.offsetLeft + slides[i].offsetWidth / 2, d = Math.abs(c - mid);
-      if (d < bd) { bd = d; best = i; }
-    }
-    dots.forEach(function (d, i) { d.classList.toggle('on', i === best); });
-  }, { passive: true });
+  // Review slider: swipe, drag, arrows, dots
+  var car = root.querySelector('.mmdp-car'), track = car.querySelector('.mmdp-track');
+  var n = track.children.length, cur = 0, dots = root.querySelectorAll('.mmdp-dots button');
+  function go(i) {
+    cur = (i + n) % n;
+    track.style.transform = 'translateX(' + (-cur * 100) + '%)';
+    dots.forEach(function (d, k) { d.classList.toggle('on', k === cur); });
+  }
+  car.querySelector('.prev').addEventListener('click', function () { go(cur - 1); });
+  car.querySelector('.next').addEventListener('click', function () { go(cur + 1); });
+  dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
+  var x0 = null, y0 = 0, dx = 0, horiz = null;
+  function start(x, y) { x0 = x; y0 = y; dx = 0; horiz = null; }
+  function move(x, y, e) {
+    if (x0 === null) return;
+    var mx = x - x0, my = y - y0;
+    if (horiz === null && (Math.abs(mx) > 6 || Math.abs(my) > 6)) horiz = Math.abs(mx) > Math.abs(my);
+    if (!horiz) return;
+    if (e.cancelable) e.preventDefault();
+    dx = mx; track.classList.add('drag');
+    track.style.transform = 'translateX(calc(' + (-cur * 100) + '% + ' + dx + 'px))';
+  }
+  function end() {
+    if (x0 === null) return;
+    track.classList.remove('drag');
+    if (horiz && Math.abs(dx) > car.clientWidth * 0.15) go(cur + (dx < 0 ? 1 : -1)); else go(cur);
+    x0 = null;
+  }
+  car.addEventListener('touchstart', function (e) { if (e.target.closest('.mmdp-arrow')) return; start(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+  car.addEventListener('touchmove', function (e) { move(e.touches[0].clientX, e.touches[0].clientY, e); }, { passive: false });
+  car.addEventListener('touchend', end); car.addEventListener('touchcancel', end);
+  car.addEventListener('mousedown', function (e) { if (e.target.closest('.mmdp-arrow')) return; e.preventDefault(); start(e.clientX, e.clientY); });
+  window.addEventListener('mousemove', function (e) { move(e.clientX, e.clientY, e); });
+  window.addEventListener('mouseup', end);
 })();
 </script>
 </body>
