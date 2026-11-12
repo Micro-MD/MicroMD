@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MicroMD Time Reverse Cream</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  MicroMD product page sections (rebuilt from the old Koriderm product page,
+  "It was never your fault" down to the FAQ; bundles + video testimonials left out).
+
+  To use on Shopify: copy everything from <style> to the closing </div> of .mmdp
+  into a "Custom Liquid" section under your Kaching Bundles block.
+  Image URLs are absolute (hosted on GitHub Pages), so they work when pasted anywhere.
+-->
+<style>
+  body { margin: 0; background: #fff; }
+  .mmdp, .mmdp * { box-sizing: border-box; }
+  .mmdp {
+    --red: #de3340;
+    --red-strong: #d0202a;
+    --ink: #121212;
+    --muted: #808080;
+    --line: #e5e5e5;
+    --blush: #fbf2f0;
+    font-family: Montserrat, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .mmdp img { display: block; max-width: 100%; height: auto; }
+  .mmdp-sec { max-width: 680px; margin: 0 auto; padding: 44px 20px; }
+  .mmdp h2 { font-size: 28px; font-weight: 500; line-height: 1.2; margin: 0 0 14px; }
+  .mmdp .lead { font-size: 15px; line-height: 1.75; margin: 0 0 22px; }
+  .mmdp .center { text-align: center; }
+
+  /* 1. Barrier explainer */
+  .mmdp-legend { display: grid; grid-template-columns: auto auto; justify-content: start; gap: 6px 18px; font-size: 13px; font-weight: 500; margin-bottom: 14px; }
+  .mmdp-legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .sw { display: inline-block; width: 16px; height: 8px; border-radius: 2px; }
+  .sw.barrier { background: #f2dcd8; } .sw.lines { background: var(--blush); border: 1px solid #f2e4e1; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
+  .dot.reg { border: 1px solid #aaa; } .dot.trc { background: var(--red); }
+  .mmdp-card { border: 1px solid var(--line); border-radius: 4px; overflow: hidden; margin-bottom: 16px; }
+  .mmdp-card.hot { border: 2px solid var(--red); }
+  .mmdp-card .top { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 14px 4px; }
+  .mmdp-card .top b { font-size: 15px; font-weight: 600; color: var(--muted); }
+  .mmdp-card.hot .top b { color: #000; }
+  .mmdp-card .top em { font-style: normal; font-size: 13px; }
+  .mmdp-card.hot .top em { color: var(--red); }
+  .mmdp-card p { font-size: 14px; line-height: 1.7; margin: 0; padding: 10px 14px 14px; }
+  .mmdp-steps { margin-top: 24px; }
+  .mmdp-step { border-top: 1px solid #222; padding: 16px 0 18px; }
+  .mmdp-step .n { color: var(--red); font-size: 14px; font-weight: 600; }
+  .mmdp-step h3 { font-size: 20px; font-weight: 600; margin: 6px 0 8px; }
+  .mmdp-step p { font-size: 14px; line-height: 1.6; margin: 0; }
+
+  /* 2. Week by week */
+  .mmdp-weeks { border-top: 1px solid var(--line); }
+  .mmdp-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 18px 0 26px; }
+  .mmdp-tabs button { font: 600 16px Montserrat, sans-serif; padding: 12px 6px; border: 0; border-radius: 3px; background: #f1f1f1; color: #111; cursor: pointer; text-transform: uppercase; }
+  .mmdp-tabs button[aria-selected="true"] { background: #ef3d3b; color: #fff; }
+  .mmdp-panel[hidden] { display: none; }
+  .mmdp-panel .hd { display: flex; gap: 14px; align-items: flex-start; }
+  .mmdp-panel .big { font-size: 40px; font-weight: 400; color: var(--red); line-height: 1; }
+  .mmdp-panel h3 { font-size: 22px; font-weight: 600; text-transform: uppercase; margin: 2px 0 4px; }
+  .mmdp-panel .hd p { font-size: 14px; line-height: 1.45; margin: 0; }
+  .mmdp-panel .ym { color: #ef3d3b; font-size: 13px; font-weight: 600; margin: 16px 0 8px; }
+  .mmdp-panel ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.9; }
+
+  /* 3. Reviews carousel */
+  .mmdp-rev h2 { font-size: 22px; }
+  .mmdp-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; scrollbar-width: none; padding: 4px 2px; }
+  .mmdp-track::-webkit-scrollbar { display: none; }
+  .mmdp-slide { flex: 0 0 88%; scroll-snap-align: center; border: 1px solid #f0b8bd; border-radius: 12px; padding: 12px; background: #fff; }
+  .mmdp-slide img { border-radius: 8px; width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .mmdp-slide q { display: block; font-size: 14px; line-height: 1.55; margin: 14px 4px 6px; quotes: none; }
+  .mmdp-slide cite { display: block; font-style: normal; font-size: 13px; font-weight: 600; margin: 0 4px 6px; }
+  .mmdp-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+  .mmdp-dots i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--red); }
+  .mmdp-dots i.on { background: var(--red); }
+
+  /* 4. Compare */
+  .mmdp-cmp h2 { font-size: 32px; font-weight: 700; text-align: center; }
+  .mmdp-table { display: grid; grid-template-columns: 1.15fr 1fr 1fr; max-width: 420px; margin: 20px auto 0; font-size: 14px; }
+  .mmdp-table > div { padding: 14px 8px; display: flex; align-items: center; border-bottom: 1px solid var(--line); line-height: 1.35; }
+  .mmdp-table .lab { font-weight: 600; padding-left: 12px; }
+  .mmdp-table .us { background: var(--red-strong); color: #fff; justify-content: center; text-align: center; font-weight: 500; border-bottom-color: rgba(255,255,255,.18); }
+  .mmdp-table .them { justify-content: center; text-align: center; }
+  .mmdp-table .head { flex-direction: column; justify-content: flex-end; border-bottom: 0; font-size: 12px; font-weight: 700; text-align: center; gap: 8px; }
+  .mmdp-table .head.us { border-radius: 8px 8px 0 0; padding-top: 16px; }
+  .mmdp-table .head img { height: 86px; width: auto; }
+  .mmdp-table .head.us img { background: #fff; border-radius: 6px; padding: 4px 10px; }
+  .mmdp-table .last { border-radius: 0 0 8px 8px; }
+  .mmdp-table .rowstart { border-left: 1px solid var(--line); }
+  .mmdp-table .them { border-right: 1px solid var(--line); }
+  .mmdp-table .head.them, .mmdp-table .head.blank { border-right: 0; }
+  .mmdp-table .head.blank { border-left: 0; }
+
+  /* 5. Results */
+  .mmdp-stats { max-width: 520px; margin: 0 auto; padding: 30px 20px 10px; }
+  .mmdp-wrinkle { max-width: 680px; margin: 0 auto; }
+  .mmdp-clin .lead { max-width: 440px; margin: 0 auto; text-align: center; }
+
+  /* 6. FAQ */
+  .mmdp-faq h2 { text-align: center; margin-bottom: 26px; }
+  .mmdp-faq details { border-top: 1px solid var(--line); }
+  .mmdp-faq details:last-child { border-bottom: 1px solid var(--line); }
+  .mmdp-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 14px 4px; font-size: 15px; font-weight: 500; }
+  .mmdp-faq summary::-webkit-details-marker { display: none; }
+  .mmdp-faq summary .q { flex: 0 0 18px; height: 18px; border: 1.5px solid #222; border-radius: 50%; font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+  .mmdp-faq summary .t { flex: 1; }
+  .mmdp-faq summary::after { content: ""; width: 8px; height: 8px; border-right: 2px solid #222; border-bottom: 2px solid #222; transform: rotate(45deg); margin: -4px 6px 0 0; transition: transform .2s; }
+  .mmdp-faq details[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
+  .mmdp-faq .a { font-size: 14px; line-height: 1.7; padding: 0 6px 18px 34px; }
+  .mmdp-faq .a p { margin: 0 0 10px; }
+
+  @media (min-width: 900px) {
+    .mmdp-slide { flex-basis: 46%; }
+  }
+</style>
+</head>
+<body>
+<div class="mmdp">
+
+  <!-- ===== Kaching Bundles / product gallery go above this line ===== -->
+
+  <!-- 1. Barrier explainer -->
+  <section class="mmdp-sec">
+    <h2>It was never your fault. Your cream just couldn't get in.</h2>
+    <p class="lead">Most creams can't get past your skin's barrier, so the good stuff never reaches where lines form. Rub a little MicroMD on the back of your hand and watch it disappear. That's the difference.</p>
+
+    <div class="mmdp-legend">
+      <span><i class="sw barrier"></i>Skin barrier</span>
+      <span><i class="sw lines"></i>Where lines form</span>
+      <span><i class="dot reg"></i>Regular cream</span>
+      <span><i class="dot trc"></i>Time Reverse Cream</span>
+    </div>
+
+    <div class="mmdp-card">
+      <div class="top"><b>Most creams</b><em>Sits on top</em></div>
+      <img src="https://gregval812-web.github.io/MicroMD-/product/images/diagram-sits-on-top.svg" alt="Regular cream sitting as a greasy film on top of the skin barrier" width="520" height="260">
+      <p>Stuck on the surface as a greasy film. By morning, it's on your pillowcase.</p>
+    </div>
+    <div class="mmdp-card hot">
+      <div class="top"><b>Time Reverse Cream</b><em>Goes in</em></div>
+      <img src="https://gregval812-web.github.io/MicroMD-/product/images/diagram-goes-in.svg" alt="Time Reverse Cream passing through the skin barrier to where lines form" width="520" height="260">
+      <p>Slips past the barrier and down to where lines form. Your skin drinks it up, with no film left behind.</p>
+    </div>
+
+    <div class="mmdp-steps">
+      <div class="mmdp-step"><div class="n">01</div><h3>It gets in</h3><p>A protein complex helps the formula absorb faster than typical creams, so it goes in instead of sitting on top.</p></div>
+      <div class="mmdp-step"><div class="n">02</div><h3>It brings Centella</h3><p>A plant Korean skincare has relied on for decades. It settles skin down instead of stinging like retinol or peeling like acids.</p></div>
+      <div class="mmdp-step"><div class="n">03</div><h3>Your skin shows it</h3><p>Softer in week 1. Lines look softer by week 3. Firmer-looking skin from week 6, as long as you use it every day.</p></div>
+    </div>
+  </section>
+
+  <!-- 2. Week by week -->
+  <section class="mmdp-sec mmdp-weeks">
+    <h2>What to expect, week by week</h2>
+    <p class="lead" style="margin:0">Use the set every day. Your skin sets the pace, so don't judge it on week 1.</p>
+    <div class="mmdp-tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-w="1">Week 1</button>
+      <button role="tab" aria-selected="false" data-w="2">Week 3</button>
+      <button role="tab" aria-selected="false" data-w="3">Week 6+</button>
+      <button role="tab" aria-selected="false" data-w="4">Day 90</button>
+    </div>
+    <div class="mmdp-panel" data-p="1">
+      <div class="hd"><span class="big">01</span><div><h3>Hydration</h3><p>Your skin soaks up the moisture and settles into the formula.</p></div></div>
+      <div class="ym">YOU MAY NOTICE</div>
+      <ul><li>Skin feels softer and more hydrated</li><li>NO greasy film, even under makeup</li><li>Under-eyes look fresher on patch days</li></ul>
+    </div>
+    <div class="mmdp-panel" data-p="2" hidden>
+      <div class="hd"><span class="big">02</span><div><h3>Smoothing</h3><p>Daily use starts to show on the surface.</p></div></div>
+      <div class="ym">YOU MAY NOTICE</div>
+      <ul><li>Fine lines around eyes and mouth look softer</li><li>Makeup goes on smoother</li><li>Someone may ask what you changed</li></ul>
+    </div>
+    <div class="mmdp-panel" data-p="3" hidden>
+      <div class="hd"><span class="big">03</span><div><h3>Firming</h3><p>Skin looks firmer and more even, face and neck.</p></div></div>
+      <div class="ym">YOU MAY NOTICE</div>
+      <ul><li>Skin looks firmer, plumper and more even</li><li>Neck and jawline look smoother</li><li>Photos start to feel easier</li></ul>
+    </div>
+    <div class="mmdp-panel" data-p="4" hidden>
+      <div class="hd"><span class="big">04</span><div><h3>Your call</h3><p>Your 90-day guarantee ends here. Keep going, or get your money back.</p></div></div>
+      <div class="ym">YOU MAY NOTICE</div>
+      <ul><li>Happy with your skin? Keep going.</li><li>Not seeing a difference? Get a full refund.</li></ul>
+    </div>
+  </section>
+
+  <!-- 3. Real People, Real Results -->
+  <section class="mmdp-sec mmdp-rev">
+    <h2 class="center">Real People, Real Results</h2>
+    <div class="mmdp-track">
+      <figure class="mmdp-slide" style="margin:0"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-janet.webp" alt="Before and after: Janet S." loading="lazy"><q>“I have sensitive skin and this is the first product that doesn’t irritate me — only smooth, glowing results.”</q><cite>— Janet S.</cite></figure>
+      <figure class="mmdp-slide" style="margin:0"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-catherine.webp" alt="Before and after: Catherine R." loading="lazy"><q>“This cream makes my skin feel firmer and brighter every morning. It’s now part of my daily routine!”</q><cite>— Catherine R.</cite></figure>
+      <figure class="mmdp-slide" style="margin:0"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-alice.webp" alt="Before and after: Alice K." loading="lazy"><q>“Results that speak for themselves. My skin feels smoother, and those deep lines are a thing of the past. I’ve finally found my 'holy grail' for confidence!”</q><cite>— Alice K.</cite></figure>
+      <figure class="mmdp-slide" style="margin:0"><img src="https://gregval812-web.github.io/MicroMD-/product/images/review-linda.webp" alt="Before and after: Linda M." loading="lazy"><q>“My wrinkles around the eyes have softened so much. I finally feel confident without makeup!”</q><cite>— Linda M.</cite></figure>
+    </div>
+    <div class="mmdp-dots"><i class="on"></i><i></i><i></i><i></i></div>
+  </section>
+
+  <!-- 4. See How We Compare -->
+  <section class="mmdp-sec mmdp-cmp">
+    <h2>See How We Compare</h2>
+    <div class="mmdp-table">
+      <div class="head blank"></div>
+      <div class="head us"><img src="https://gregval812-web.github.io/MicroMD-/product/images/micromd-tube.webp" alt="MicroMD Time Reverse tube">MicroMD Time Reverse</div>
+      <div class="head them"><img src="https://gregval812-web.github.io/MicroMD-/product/images/department-store-jar.webp" alt="Department-store cream jar">Luxury department-store creams</div>
+
+      <div class="lab rowstart">Gets into your skin</div><div class="us">Sinks in, keeps moisture in</div><div class="them">Sits on top, gone by noon</div>
+      <div class="lab rowstart">Sensitive skin</div><div class="us">Fragrance-free, no sting</div><div class="them">Often fragranced</div>
+      <div class="lab rowstart">Key Ingredient</div><div class="us">Centella Asiatica</div><div class="them">Varies by brand</div>
+      <div class="lab rowstart">Your routine</div><div class="us">1 step</div><div class="them">3–7 products</div>
+      <div class="lab rowstart">Results</div><div class="us">Week 6-12</div><div class="them">Varies</div>
+      <div class="lab rowstart">Guarantee</div><div class="us last">90-day money-back</div><div class="them">You keep the jar</div>
+    </div>
+  </section>
+
+  <!-- 5. Results -->
+  <section>
+    <img class="mmdp-stats" src="https://gregval812-web.github.io/MicroMD-/product/images/results-stats.svg" alt="94% noticed their skin appeared healthier and more radiant. 88% saw their skin feel firmer and visibly lifted. 83% noticed their skin felt smoother with fewer wrinkles." loading="lazy">
+    <img class="mmdp-wrinkle" src="https://gregval812-web.github.io/MicroMD-/product/images/visible-wrinkle-reduction.webp" alt="Visible wrinkle reduction: before and 4 weeks after use" loading="lazy">
+  </section>
+  <section class="mmdp-sec mmdp-clin center">
+    <h2>Clinically Proven Results</h2>
+    <p class="lead">Studies show visible improvements in wrinkle count, size, and depth after consistent use.</p>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section class="mmdp-sec mmdp-faq">
+    <h2>Frequently Asked Questions</h2>
+    <details><summary><span class="q">?</span><span class="t">How long until I see results?</span></summary>
+      <div class="a"><p>Most customers notice immediate hydration and a smoother texture after the first application. For visible improvements in skin radiance and firmness, we recommend consistent daily use for 30 days to allow your skin cycle to adjust.</p></div></details>
+    <details><summary><span class="q">?</span><span class="t">Is this safe to use?</span></summary>
+      <div class="a"><p>Yes! The MicroMD formula uses highly purified Centella Asiatica to soothe, comfort, and support the skin's natural moisture barrier from the moment you apply it. The formula is gentle enough for all skin types, including sensitive and reactive skin, making it a daily essential for anyone who wants calmer, more balanced-looking skin.</p></div></details>
+    <details><summary><span class="q">?</span><span class="t">Where can I use the Time Reverse cream?</span></summary>
+      <div class="a"><p>The MicroMD™ Time Reverse Cream works on all areas showing signs of aging: face, neck, eyes, lips, forehead, and jawline. Perfect for targeting fine lines, uneven tone, and loss of firmness. You can also apply it to areas with rough texture or dryness.</p></div></details>
+    <details><summary><span class="q">?</span><span class="t">Does it have a scent?</span></summary>
+      <div class="a"><p>No added fragrance. The MicroMD formula is nearly odorless, with only a very light, natural scent from centella and botanical oils that fades quickly upon application.</p></div></details>
+    <details><summary><span class="q">?</span><span class="t">Do I need other products with this cream?</span></summary>
+      <div class="a"><p>The MicroMD™ Time Reverse Cream targets fine lines, wrinkles, dark spots, loss of firmness, and dullness all at once. Therefore, complicated routines are not needed! The cream works beautifully on its own and easily layers into your current skincare routine. Many users find this is the only cream they need for visible, youthful-looking results and radiant, glowing skin. Just cleanse, apply, and enjoy the results!</p></div></details>
+    <details><summary><span class="q">?</span><span class="t">Manage your subscription</span></summary>
+      <div class="a">
+        <p>The MicroMD™ Time Reverse Cream is available as either a one-time purchase or as part of an optional subscription. Customers can choose their preferred option at the time of purchase.</p>
+        <p>If you choose the subscription option, you will receive a discounted price on your initial order, and this same discounted price will apply to all future recurring deliveries.</p>
+        <p>If you enrolled in a subscription for the MicroMD™ Time Reverse Cream, it means the subscription option was clearly presented during your purchase. All recurring charges are billed every 30 days, and we will ship the same quantity of products that you initially purchased with each recurring order. Please allow standard shipping times from the moment you are charged until your recurring order arrives.</p>
+        <p>You can cancel at any time by visiting your online portal under the “Subscription Management” tab on our store, using the “Manage Your Subscription” link in your order or billing emails, or by contacting our support team, who will be happy to assist.</p>
+      </div></details>
+  </section>
+
+</div>
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  // Week tabs
+  var tabs = root.querySelectorAll('.mmdp-tabs button');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t); });
+      root.querySelectorAll('.mmdp-panel').forEach(function (p) { p.hidden = p.dataset.p !== t.dataset.w; });
+    });
+  });
+  // Review carousel dots
+  var track = root.querySelector('.mmdp-track'), dots = root.querySelectorAll('.mmdp-dots i');
+  track.addEventListener('scroll', function () {
+    var slides = track.children, best = 0, bd = 1e9, mid = track.scrollLeft + track.clientWidth / 2;
+    for (var i = 0; i < slides.length; i++) {
+      var c = slides[i].offsetLeft - track.offsetLeft + slides[i].offsetWidth / 2, d = Math.abs(c - mid);
+      if (d < bd) { bd = d; best = i; }
+    }
+    dots.forEach(function (d, i) { d.classList.toggle('on', i === best); });
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
