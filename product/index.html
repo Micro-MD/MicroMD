@@ -8,16 +8,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!--
-  MicroMD product page sections (rebuilt from the old product page,
-  "It was never your fault" down to the FAQ; bundles + video testimonials left out).
-
-  To use on Shopify: copy everything from <style> down to the final </script>
-  into a "Custom Liquid" section under your Kaching Bundles block.
-  Image URLs are absolute (hosted on GitHub Pages), so they work when pasted anywhere.
+  MicroMD product page sections. For Shopify, use copy.html (one-click copy)
+  or shopify-snippet.html; both contain only the part between the
+  SHOPIFY-START and SHOPIFY-END markers below.
 -->
+<style>body { margin: 0; background: #fff; }</style>
+</head>
+<body>
+<!-- SHOPIFY-START -->
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
-  body { margin: 0; background: #fff; }
   .mmdp, .mmdp * { box-sizing: border-box; }
   .mmdp {
     --red: #de3340;
@@ -140,8 +140,6 @@
   .mmdp .mmdp-track { display: flex !important; flex-wrap: nowrap !important; width: 100% !important; }
   .mmdp .mmdp-slide { flex: 0 0 100% !important; max-width: 100% !important; width: 100% !important; margin: 0 !important; }
 </style>
-</head>
-<body>
 <div class="mmdp">
 
   <!-- ===== Kaching Bundles / product gallery go above this line ===== -->
@@ -355,5 +353,6 @@
   document.addEventListener('mouseup', end);
 })();
 </script>
+<!-- SHOPIFY-END -->
 </body>
 </html>
