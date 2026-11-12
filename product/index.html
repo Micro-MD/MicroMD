@@ -11,11 +11,12 @@
   MicroMD product page sections (rebuilt from the old product page,
   "It was never your fault" down to the FAQ; bundles + video testimonials left out).
 
-  To use on Shopify: copy everything from <style> to the closing </div> of .mmdp
+  To use on Shopify: copy everything from <style> down to the final </script>
   into a "Custom Liquid" section under your Kaching Bundles block.
   Image URLs are absolute (hosted on GitHub Pages), so they work when pasted anywhere.
 -->
 <style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
   body { margin: 0; background: #fff; }
   .mmdp, .mmdp * { box-sizing: border-box; }
   .mmdp {
@@ -131,6 +132,13 @@
   @media (min-width: 900px) {
     .mmdp-rev { max-width: 560px; }
   }
+  /* Guard against Shopify theme styles */
+  .mmdp .mmdp-arrow, .mmdp .mmdp-dots button, .mmdp .mmdp-tabs button { -webkit-appearance: none !important; appearance: none !important; min-width: 0 !important; min-height: 0 !important; margin: 0 !important; line-height: 1 !important; text-indent: 0 !important; letter-spacing: normal !important; box-sizing: border-box !important; }
+  .mmdp .mmdp-arrow { position: absolute !important; display: grid !important; width: 40px !important; height: 40px !important; padding: 0 !important; border: 0 !important; border-radius: 50% !important; background: rgba(255,255,255,.92) !important; }
+  .mmdp .mmdp-dots button { display: grid !important; width: 24px !important; height: 24px !important; padding: 0 !important; border: 0 !important; background: none !important; box-shadow: none !important; }
+  .mmdp .mmdp-car { position: relative !important; overflow: hidden !important; width: 100% !important; }
+  .mmdp .mmdp-track { display: flex !important; flex-wrap: nowrap !important; width: 100% !important; }
+  .mmdp .mmdp-slide { flex: 0 0 100% !important; max-width: 100% !important; width: 100% !important; margin: 0 !important; }
 </style>
 </head>
 <body>
@@ -267,50 +275,89 @@
 
 </div>
 <script>
+/* MicroMD sections: week tabs + review slider.
+   Uses document-level listeners, so it keeps working if Shopify/Replo
+   re-renders the section or runs this script before/after the markup. */
 (function () {
-  var root = document.currentScript.previousElementSibling;
-  // Week tabs
-  var tabs = root.querySelectorAll('.mmdp-tabs button');
-  tabs.forEach(function (t) {
-    t.addEventListener('click', function () {
-      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t); });
-      root.querySelectorAll('.mmdp-panel').forEach(function (p) { p.hidden = p.dataset.p !== t.dataset.w; });
-    });
-  });
-  // Review slider: swipe, drag, arrows, dots
-  var car = root.querySelector('.mmdp-car'), track = car.querySelector('.mmdp-track');
-  var n = track.children.length, cur = 0, dots = root.querySelectorAll('.mmdp-dots button');
-  function go(i) {
-    cur = (i + n) % n;
-    track.style.transform = 'translateX(' + (-cur * 100) + '%)';
-    dots.forEach(function (d, k) { d.classList.toggle('on', k === cur); });
+  if (window.__mmdpInit) return; window.__mmdpInit = true;
+
+  function slider(car) {
+    var track = car.querySelector('.mmdp-track');
+    var n = track.children.length;
+    var cur = +car.getAttribute('data-cur') || 0;
+    return {
+      car: car, track: track, n: n, cur: cur,
+      go: function (i) {
+        cur = ((i % n) + n) % n;
+        car.setAttribute('data-cur', cur);
+        track.style.transform = 'translateX(' + (-cur * 100) + '%)';
+        var dots = car.parentNode.querySelectorAll('.mmdp-dots button');
+        for (var k = 0; k < dots.length; k++) dots[k].className = k === cur ? 'on' : '';
+      }
+    };
   }
-  car.querySelector('.prev').addEventListener('click', function () { go(cur - 1); });
-  car.querySelector('.next').addEventListener('click', function () { go(cur + 1); });
-  dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
-  var x0 = null, y0 = 0, dx = 0, horiz = null;
-  function start(x, y) { x0 = x; y0 = y; dx = 0; horiz = null; }
-  function move(x, y, e) {
-    if (x0 === null) return;
-    var mx = x - x0, my = y - y0;
-    if (horiz === null && (Math.abs(mx) > 6 || Math.abs(my) > 6)) horiz = Math.abs(mx) > Math.abs(my);
-    if (!horiz) return;
+
+  // Clicks: arrows, dots, week tabs
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t.closest) return;
+    var arrow = t.closest('.mmdp-arrow');
+    if (arrow) {
+      e.preventDefault();
+      var s = slider(arrow.closest('.mmdp-car'));
+      s.go(s.cur + (arrow.classList.contains('next') ? 1 : -1));
+      return;
+    }
+    var dot = t.closest('.mmdp-dots button');
+    if (dot) {
+      e.preventDefault();
+      var wrap = dot.closest('.mmdp-rev');
+      var all = wrap.querySelectorAll('.mmdp-dots button');
+      slider(wrap.querySelector('.mmdp-car')).go([].indexOf.call(all, dot));
+      return;
+    }
+    var tab = t.closest('.mmdp-tabs button');
+    if (tab) {
+      e.preventDefault();
+      var sec = tab.closest('.mmdp-weeks');
+      var tabs = sec.querySelectorAll('.mmdp-tabs button');
+      for (var i = 0; i < tabs.length; i++) tabs[i].setAttribute('aria-selected', tabs[i] === tab ? 'true' : 'false');
+      var panels = sec.querySelectorAll('.mmdp-panel');
+      for (var j = 0; j < panels.length; j++) panels[j].hidden = panels[j].getAttribute('data-p') !== tab.getAttribute('data-w');
+    }
+  });
+
+  // Swipe (touch) and drag (mouse)
+  var st = null;
+  function start(e, x, y) {
+    if (!e.target.closest || e.target.closest('.mmdp-arrow')) return;
+    var car = e.target.closest('.mmdp-car');
+    if (!car) return;
+    st = { s: slider(car), x: x, y: y, dx: 0, horiz: null };
+  }
+  function move(e, x, y) {
+    if (!st) return;
+    var mx = x - st.x, my = y - st.y;
+    if (st.horiz === null && (Math.abs(mx) > 6 || Math.abs(my) > 6)) st.horiz = Math.abs(mx) > Math.abs(my);
+    if (!st.horiz) return;
     if (e.cancelable) e.preventDefault();
-    dx = mx; track.classList.add('drag');
-    track.style.transform = 'translateX(calc(' + (-cur * 100) + '% + ' + dx + 'px))';
+    st.dx = mx;
+    st.s.track.style.transition = 'none';
+    st.s.track.style.transform = 'translateX(calc(' + (-st.s.cur * 100) + '% + ' + mx + 'px))';
   }
   function end() {
-    if (x0 === null) return;
-    track.classList.remove('drag');
-    if (horiz && Math.abs(dx) > car.clientWidth * 0.15) go(cur + (dx < 0 ? 1 : -1)); else go(cur);
-    x0 = null;
+    if (!st) return;
+    var s = st.s; s.track.style.transition = '';
+    if (st.horiz && Math.abs(st.dx) > s.car.clientWidth * 0.15) s.go(s.cur + (st.dx < 0 ? 1 : -1)); else s.go(s.cur);
+    st = null;
   }
-  car.addEventListener('touchstart', function (e) { if (e.target.closest('.mmdp-arrow')) return; start(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-  car.addEventListener('touchmove', function (e) { move(e.touches[0].clientX, e.touches[0].clientY, e); }, { passive: false });
-  car.addEventListener('touchend', end); car.addEventListener('touchcancel', end);
-  car.addEventListener('mousedown', function (e) { if (e.target.closest('.mmdp-arrow')) return; e.preventDefault(); start(e.clientX, e.clientY); });
-  window.addEventListener('mousemove', function (e) { move(e.clientX, e.clientY, e); });
-  window.addEventListener('mouseup', end);
+  document.addEventListener('touchstart', function (e) { start(e, e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+  document.addEventListener('touchmove', function (e) { if (st) move(e, e.touches[0].clientX, e.touches[0].clientY); }, { passive: false });
+  document.addEventListener('touchend', end);
+  document.addEventListener('touchcancel', end);
+  document.addEventListener('mousedown', function (e) { start(e, e.clientX, e.clientY); if (st) e.preventDefault(); });
+  document.addEventListener('mousemove', function (e) { if (st) move(e, e.clientX, e.clientY); });
+  document.addEventListener('mouseup', end);
 })();
 </script>
 </body>
