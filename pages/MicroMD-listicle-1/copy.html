@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copy Prelander Code</title>
+<style>
+:root{--red:#d0202a;--ink:#121212;--bg:#f6f6f6;--card:#fff;--line:#e2e2e2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#eee;--bg:#161616;--card:#202020;--line:#333}}
+:root[data-theme="dark"]{--ink:#eee;--bg:#161616;--card:#202020;--line:#333}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:24px;margin:0 0 6px}
+p{margin:0 0 16px}
+ol{margin:0 0 20px;padding-left:22px}
+.btn{display:block;width:100%;border:0;border-radius:10px;background:var(--red);color:#fff;font:700 18px system-ui,sans-serif;padding:16px;cursor:pointer}
+.btn.ok{background:#1f8a3b}
+textarea{width:100%;box-sizing:border-box;height:340px;margin-top:14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:12px/1.45 ui-monospace,Menlo,Consolas,monospace;padding:12px;resize:vertical}
+.links{margin-top:14px;font-size:14px}
+.links a{color:var(--red)}
+</style></head>
+<body><div class="wrap">
+<h1>MicroMD listicle prelander: Shopify code</h1>
+<p>One tap copies everything you need.</p>
+<button class="btn" id="copy" type="button">Copy code</button>
+<ol style="margin-top:18px">
+<li>In Shopify, go to <b>Online Store &rarr; Pages &rarr; Add page</b>. Title: <b>MicroMD listicle 1</b>.</li>
+<li>Under <b>Search engine listing</b>, click edit and set the URL handle to <b>micromd-listicle-1</b>. Save.</li>
+<li>Go to <b>Online Store &rarr; Themes &rarr; Customize</b>. In the top dropdown pick <b>Pages &rarr; Create template</b>, name it <b>listicle</b>.</li>
+<li>In that template, remove the default page section, then <b>Add section &rarr; Custom Liquid</b>. Paste the code and <b>Save</b>.</li>
+<li>Back on your page, set <b>Theme template</b> to <b>listicle</b> and save. Your page is now at micromd.store/pages/micromd-listicle-1.</li>
+</ol>
+<textarea id="code" readonly spellcheck="false">&lt;style&gt;
+  @import url(&quot;https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap&quot;);
+  .mmd, .mmd * { box-sizing: border-box; }
+  .mmd {
+    --red: #de1313;
+    --btn: #e2343b;
+    --orange: #f26a1b;
+    --text: #242424;
+    font-family: Poppins, sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  .mmd img { display: block; width: 100%; height: auto; }
+  .mmd-wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  .mmd-head { text-align: center; padding-top: 28px; padding-bottom: 8px; }
+  .mmd-title { font-size: 34px; line-height: 1.2; font-weight: 700; color: #000; margin: 0 auto; max-width: 960px; letter-spacing: .2px; }
+  .mmd-byline { font-size: 13px; font-style: italic; margin: 14px 0 0; color: #222; }
+  .mmd-byline span { margin: 0 10px; font-style: normal; }
+  .mmd-hero { display: none; margin: 18px -20px 0; }
+  .mmd-intro { font-size: 15px; line-height: 1.45; max-width: 900px; margin: 22px auto 40px; }
+
+  /* Listicle items */
+  .mmd-item { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; align-items: center; margin-bottom: 60px; }
+  .mmd-item h2 { grid-column: 1; font-size: 22px; font-weight: 700; color: #000; margin: 0 0 14px; align-self: end; line-height: 1.35; }
+  .mmd-item .mmd-img { grid-column: 1; grid-row: 2; }
+  .mmd-item p { grid-column: 2; grid-row: 2; font-size: 16px; line-height: 1.4; margin: 0; padding: 0 0 0 30px; }
+  .mmd-item.flip h2, .mmd-item.flip .mmd-img { grid-column: 2; }
+  .mmd-item.flip p { grid-column: 1; padding: 0 30px 0 0; }
+
+  /* Offer */
+  .mmd-offer-head { text-align: center; margin: 20px 0 30px; }
+  .mmd-offer-head .sale { color: var(--red); font-size: 38px; font-weight: 700; margin: 0; line-height: 1.2; }
+  .mmd-offer-head .deal { color: #000; font-size: 38px; font-weight: 700; margin: 0; line-height: 1.2; }
+  .mmd-offer { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: center; }
+  .mmd-box { border: 2px solid var(--orange); padding: 26px 40px 22px; text-align: center; }
+  .mmd-box .bogo { color: var(--red); font-size: 26px; font-weight: 700; margin: 0; }
+  .mmd-stars { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 6px 0 14px; font-size: 13px; font-weight: 600; }
+  .mmd-stars .s { color: #f5b400; font-size: 18px; letter-spacing: 1px; }
+  .mmd-box .brand { font-size: 30px; font-weight: 600; color: #222; margin: 0; line-height: 1.15; }
+  .mmd-box .prod { font-size: 30px; font-weight: 600; color: #222; margin: 0 0 18px; line-height: 1.15; }
+  .mmd-btn { display: block; background: var(--btn); color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; padding: 15px 10px; border-radius: 4px; text-transform: uppercase; transition: filter .15s; }
+  .mmd-btn:hover { filter: brightness(1.08); }
+  .mmd-risk { display: inline-block; background: #faf6f2; font-size: 13px; padding: 8px 16px; margin: 16px 0 10px; }
+  .mmd-risk b.hi { color: var(--red); }
+  .mmd-risk .sep { margin: 0 14px; }
+  .mmd-guar { font-size: 11px; margin: 0; }
+
+  .mmd-disc { font-size: 12px; line-height: 2; letter-spacing: .4px; color: #555; max-width: 1060px; margin: 60px auto 40px; padding: 0 20px; }
+
+  /* Sticky CTA bar */
+  .mmd-sticky { position: fixed; left: 0; right: 0; bottom: 0; background: var(--red); padding: 12px 20px; z-index: 50; display: flex; justify-content: center; }
+  .mmd-sticky a { background: #fff; color: var(--red); text-decoration: none; font-weight: 600; font-size: 20px; text-transform: uppercase; width: 100%; max-width: 400px; text-align: center; padding: 11px 10px; border-radius: 6px; }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .mmd-head { text-align: left; padding-top: 18px; }
+    .mmd-title { font-size: 25px; line-height: 1.32; }
+    .mmd-byline { text-align: center; font-size: 12px; line-height: 2.2; }
+    .mmd-hero { display: block; }
+    .mmd-intro { font-size: 15px; margin: 22px 0 36px; }
+    .mmd-item, .mmd-item.flip { display: block; margin-bottom: 40px; }
+    .mmd-item h2 { text-align: center; font-size: 20px; }
+    .mmd-item .mmd-img { margin-bottom: 14px; }
+    .mmd-item p, .mmd-item.flip p { padding: 0; font-size: 16px; }
+    .mmd-offer-head .sale, .mmd-offer-head .deal { font-size: 30px; }
+    .mmd-offer { grid-template-columns: 1fr; }
+    .mmd-offer .mmd-offer-img { order: -1; }
+    .mmd-box { padding: 22px 18px 18px; }
+    .mmd-box .brand, .mmd-box .prod { font-size: 26px; }
+    .mmd-disc { line-height: 1.8; }
+  }
+  .mmd-spacer { height: 76px; }
+&lt;/style&gt;
+&lt;div class=&quot;mmd&quot;&gt;
+
+  &lt;header class=&quot;mmd-wrap mmd-head&quot;&gt;
+    &lt;h1 class=&quot;mmd-title&quot;&gt;Dermatologists Shocked: This Korean Pharmacy Cream Can Reduce Years Off Aging Skin. Here&#x27;s 7 Reasons Why.&lt;/h1&gt;
+    &lt;p class=&quot;mmd-byline&quot;&gt;By Emma Taylor&lt;span&gt;|&lt;/span&gt;December 13, 2025&lt;span&gt;|&lt;/span&gt;10:35 am EST&lt;/p&gt;
+    &lt;!-- Hero (mobile only) — product shot from your store --&gt;
+    &lt;a class=&quot;mmd-hero&quot; href=&quot;https://micromd.store/products/micromd-%E2%84%A2-anti-aging-cream&quot;&gt;&lt;img src=&quot;https://cdn.shopify.com/s/files/1/0769/2858/1767/files/hf_20261112_192357_412b599d-ab18-457c-85c9-5553b4cf2b37.png?v=1794512146&amp;width=1000&quot; alt=&quot;MicroMD Time Reverse Cream&quot;&gt;&lt;/a&gt;
+  &lt;/header&gt;
+
+  &lt;main class=&quot;mmd-wrap&quot;&gt;
+    &lt;p class=&quot;mmd-intro&quot;&gt;Every morning, millions of women look in the mirror hoping to see the face from 10 years ago — but see deepening lines, sagging skin, and dark spots instead. However, a pharmaceutical-grade cream that&#x27;s sold 10 million tubes in Korea is helping women actually reverse these signs, with some avoiding Botox and procedures entirely.&lt;/p&gt;
+
+    &lt;section class=&quot;mmd-item&quot;&gt;
+      &lt;h2&gt;1. Erases &quot;Tired Eyes&quot; in Weeks&lt;/h2&gt;
+      &lt;!-- Reason 1 image --&gt;
+      &lt;img class=&quot;mmd-img&quot; src=&quot;https://gregval812-web.github.io/MicroMD-/images/tired-eyes.webp&quot; alt=&quot;Reduced lines around the eyes&quot; loading=&quot;lazy&quot;&gt;
+      &lt;p&gt;You know the ones - the lines that make people ask if you&#x27;re okay even when you&#x27;ve slept 8 hours. Clinical studies show 137% reduction in wrinkle depth. Your reflection will finally match how young you feel inside.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;mmd-item flip&quot;&gt;
+      &lt;h2&gt;2. Fixes Crepey Neck Skin&lt;/h2&gt;
+      &lt;!-- Reason 2 image --&gt;
+      &lt;img class=&quot;mmd-img&quot; src=&quot;https://gregval812-web.github.io/MicroMD-/images/crepey-neck.webp&quot; alt=&quot;Smoother neck skin&quot; loading=&quot;lazy&quot;&gt;
+      &lt;p&gt;That delicate, papery skin texture that scarves can&#x27;t always hide? The pharmaceutical-grade Centella Asiatica and collagen complex actually rebuilds skin density. Wear that open neckline again with confidence.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;mmd-item&quot;&gt;
+      &lt;h2&gt;3. Restores Your Skin&#x27;s &quot;Bounce&quot;&lt;/h2&gt;
+      &lt;!-- Reason 3 image --&gt;
+      &lt;img class=&quot;mmd-img&quot; src=&quot;https://gregval812-web.github.io/MicroMD-/images/skin-bounce.webp&quot; alt=&quot;Firmer, more elastic skin&quot; loading=&quot;lazy&quot;&gt;
+      &lt;p&gt;You press your skin and it just... stays there. Loss of elasticity ages you more than wrinkles. This cream&#x27;s elastin and protein complex (absorbs 251% faster) restores that youthful snap-back you thought was gone forever.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;mmd-item flip&quot;&gt;
+      &lt;h2&gt;4. Fades Dark Spots &amp;amp; Old Scars&lt;/h2&gt;
+      &lt;!-- Reason 4 image --&gt;
+      &lt;img class=&quot;mmd-img&quot; src=&quot;https://gregval812-web.github.io/MicroMD-/images/dark-spots.webp&quot; alt=&quot;Faded dark spots&quot; loading=&quot;lazy&quot;&gt;
+      &lt;p&gt;Originally developed as medical-grade scar treatment since the 1970s, this doesn&#x27;t just cover damage - it reverses it. Watch those dark marks and old scars fade like they never existed.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;mmd-item&quot;&gt;
+      &lt;h2&gt;5. Transforms Rough, Dry Texture&lt;/h2&gt;
+      &lt;!-- Reason 5 image --&gt;
+      &lt;img class=&quot;mmd-img&quot; src=&quot;https://cdn.shopify.com/s/files/1/0769/2858/1767/files/5fac7d78-4a97-43de-a125-6360867f88a8.jpg?v=1794512202&amp;width=1000&quot; alt=&quot;Smooth glass-skin texture&quot; loading=&quot;lazy&quot;&gt;
+      &lt;p&gt;That rough, dry texture that makes makeup sit wrong? The hyaluronic acid and nutrient blend creates glass skin - the smooth, poreless look Korean women are famous for.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;mmd-item flip&quot;&gt;
+      &lt;h2&gt;6. Cheaper than invasive alternatives (Works Better Than $300 Creams)&lt;/h2&gt;
+      &lt;!-- Reason 6 image --&gt;
+      &lt;img class=&quot;mmd-img&quot; src=&quot;https://gregval812-web.github.io/MicroMD-/images/cheaper-alternatives.webp&quot; alt=&quot;Visible lifting results&quot; loading=&quot;lazy&quot;&gt;
+      &lt;p&gt;Skip the expensive skincare. Women are calling this their &quot;Beauty must-have&quot; because it actually delivers visible lifting. Professional results without insulting prices.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;mmd-item&quot;&gt;
+      &lt;h2&gt;7. It Sells Out Everywhere (Even in Korea)&lt;/h2&gt;
+      &lt;!-- Reason 7 image --&gt;
+      &lt;img class=&quot;mmd-img&quot; src=&quot;https://gregval812-web.github.io/MicroMD-/images/sells-out-korea.webp&quot; alt=&quot;Sold out in Korean pharmacies&quot; loading=&quot;lazy&quot;&gt;
+      &lt;p&gt;When I went to Korea to find this cream, every pharmacy was sold out. That&#x27;s what happens when 10 million tubes later, word spreads that something actually works. Smart women are buying 3-4 tubes because once it&#x27;s gone, you&#x27;re out of luck until you fly to Korea.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;div class=&quot;mmd-offer-head&quot;&gt;
+      &lt;p class=&quot;sale&quot;&gt;Black Friday Sale&lt;/p&gt;
+      &lt;p class=&quot;deal&quot;&gt;Buy 2 Get 1 Free!&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;mmd-offer&quot;&gt;
+      &lt;div class=&quot;mmd-box&quot;&gt;
+        &lt;p class=&quot;bogo&quot;&gt;BUY 2 GET 1 FREE&lt;/p&gt;
+        &lt;div class=&quot;mmd-stars&quot;&gt;&lt;span class=&quot;s&quot; aria-hidden=&quot;true&quot;&gt;★★★★★&lt;/span&gt;&lt;span&gt;Rated 4.8 out of 5&lt;/span&gt;&lt;/div&gt;
+        &lt;p class=&quot;brand&quot;&gt;MicroMD&lt;/p&gt;
+        &lt;p class=&quot;prod&quot;&gt;Time Reverse Cream&lt;/p&gt;
+        &lt;a class=&quot;mmd-btn&quot; href=&quot;https://micromd.store/products/micromd-%E2%84%A2-anti-aging-cream&quot;&gt;Check Availability&lt;/a&gt;
+        &lt;div class=&quot;mmd-risk&quot;&gt;Sell-out Risk: &lt;b class=&quot;hi&quot;&gt;Very High&lt;/b&gt;&lt;span class=&quot;sep&quot;&gt;|&lt;/span&gt;&lt;b&gt;FREE&lt;/b&gt; Shipping&lt;/div&gt;
+        &lt;p class=&quot;mmd-guar&quot;&gt;Try it today with a 90-Day Money Back Guarantee!&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;!-- Offer image — &quot;Why Women Love MicroMD&quot; from your store --&gt;
+      &lt;a class=&quot;mmd-offer-img&quot; href=&quot;https://micromd.store/products/micromd-%E2%84%A2-anti-aging-cream&quot;&gt;&lt;img src=&quot;https://cdn.shopify.com/s/files/1/0769/2858/1767/files/hf_20261112_194521_303c87fe-a621-49a4-b484-a5797ab99bea.png?v=1794512861&amp;width=1000&quot; alt=&quot;Why women love MicroMD Time Reverse&quot; loading=&quot;lazy&quot;&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+
+  &lt;p class=&quot;mmd-disc&quot;&gt;DISCLAIMER: Individual results may vary. The results and claims presented on this page are based on internal consumer perception studies and individual testimonials. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. The clinical study results referenced represent data from controlled testing environments and individual results may differ. Before and after images are from actual customers but do not guarantee similar outcomes for all users. Always perform a patch test before using new skincare products. If you have sensitive skin or existing skin conditions, consult with a dermatologist before use.&lt;/p&gt;
+
+  &lt;div class=&quot;mmd-spacer&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;mmd-sticky&quot;&gt;&lt;a href=&quot;https://micromd.store/products/micromd-%E2%84%A2-anti-aging-cream&quot;&gt;Check Availability&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+</textarea>
+<div class="links"><a href="./">Preview the prelander</a> &middot; <a href="shopify-snippet.html" download>Download as a file</a></div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('copy'), t=document.getElementById('code');
+  function done(ok){ b.textContent = ok ? 'Copied! Now paste it into Shopify' : 'Select the code below and copy it'; b.classList.toggle('ok', ok); if(ok) setTimeout(function(){ b.textContent='Copy code'; b.classList.remove('ok'); }, 4000); }
+  b.addEventListener('click', function(){
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(t.value).then(function(){ done(true); }, fallback);
+    } else fallback();
+    function fallback(){ try { t.focus(); t.select(); t.setSelectionRange(0, t.value.length); done(document.execCommand('copy')); } catch(e){ done(false); } }
+  });
+})();
+</script>
+</body></html>

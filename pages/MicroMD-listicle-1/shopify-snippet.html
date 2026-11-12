@@ -1,0 +1,161 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+  .mmd, .mmd * { box-sizing: border-box; }
+  .mmd {
+    --red: #de1313;
+    --btn: #e2343b;
+    --orange: #f26a1b;
+    --text: #242424;
+    font-family: Poppins, sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  .mmd img { display: block; width: 100%; height: auto; }
+  .mmd-wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  .mmd-head { text-align: center; padding-top: 28px; padding-bottom: 8px; }
+  .mmd-title { font-size: 34px; line-height: 1.2; font-weight: 700; color: #000; margin: 0 auto; max-width: 960px; letter-spacing: .2px; }
+  .mmd-byline { font-size: 13px; font-style: italic; margin: 14px 0 0; color: #222; }
+  .mmd-byline span { margin: 0 10px; font-style: normal; }
+  .mmd-hero { display: none; margin: 18px -20px 0; }
+  .mmd-intro { font-size: 15px; line-height: 1.45; max-width: 900px; margin: 22px auto 40px; }
+
+  /* Listicle items */
+  .mmd-item { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; align-items: center; margin-bottom: 60px; }
+  .mmd-item h2 { grid-column: 1; font-size: 22px; font-weight: 700; color: #000; margin: 0 0 14px; align-self: end; line-height: 1.35; }
+  .mmd-item .mmd-img { grid-column: 1; grid-row: 2; }
+  .mmd-item p { grid-column: 2; grid-row: 2; font-size: 16px; line-height: 1.4; margin: 0; padding: 0 0 0 30px; }
+  .mmd-item.flip h2, .mmd-item.flip .mmd-img { grid-column: 2; }
+  .mmd-item.flip p { grid-column: 1; padding: 0 30px 0 0; }
+
+  /* Offer */
+  .mmd-offer-head { text-align: center; margin: 20px 0 30px; }
+  .mmd-offer-head .sale { color: var(--red); font-size: 38px; font-weight: 700; margin: 0; line-height: 1.2; }
+  .mmd-offer-head .deal { color: #000; font-size: 38px; font-weight: 700; margin: 0; line-height: 1.2; }
+  .mmd-offer { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: center; }
+  .mmd-box { border: 2px solid var(--orange); padding: 26px 40px 22px; text-align: center; }
+  .mmd-box .bogo { color: var(--red); font-size: 26px; font-weight: 700; margin: 0; }
+  .mmd-stars { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 6px 0 14px; font-size: 13px; font-weight: 600; }
+  .mmd-stars .s { color: #f5b400; font-size: 18px; letter-spacing: 1px; }
+  .mmd-box .brand { font-size: 30px; font-weight: 600; color: #222; margin: 0; line-height: 1.15; }
+  .mmd-box .prod { font-size: 30px; font-weight: 600; color: #222; margin: 0 0 18px; line-height: 1.15; }
+  .mmd-btn { display: block; background: var(--btn); color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; padding: 15px 10px; border-radius: 4px; text-transform: uppercase; transition: filter .15s; }
+  .mmd-btn:hover { filter: brightness(1.08); }
+  .mmd-risk { display: inline-block; background: #faf6f2; font-size: 13px; padding: 8px 16px; margin: 16px 0 10px; }
+  .mmd-risk b.hi { color: var(--red); }
+  .mmd-risk .sep { margin: 0 14px; }
+  .mmd-guar { font-size: 11px; margin: 0; }
+
+  .mmd-disc { font-size: 12px; line-height: 2; letter-spacing: .4px; color: #555; max-width: 1060px; margin: 60px auto 40px; padding: 0 20px; }
+
+  /* Sticky CTA bar */
+  .mmd-sticky { position: fixed; left: 0; right: 0; bottom: 0; background: var(--red); padding: 12px 20px; z-index: 50; display: flex; justify-content: center; }
+  .mmd-sticky a { background: #fff; color: var(--red); text-decoration: none; font-weight: 600; font-size: 20px; text-transform: uppercase; width: 100%; max-width: 400px; text-align: center; padding: 11px 10px; border-radius: 6px; }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .mmd-head { text-align: left; padding-top: 18px; }
+    .mmd-title { font-size: 25px; line-height: 1.32; }
+    .mmd-byline { text-align: center; font-size: 12px; line-height: 2.2; }
+    .mmd-hero { display: block; }
+    .mmd-intro { font-size: 15px; margin: 22px 0 36px; }
+    .mmd-item, .mmd-item.flip { display: block; margin-bottom: 40px; }
+    .mmd-item h2 { text-align: center; font-size: 20px; }
+    .mmd-item .mmd-img { margin-bottom: 14px; }
+    .mmd-item p, .mmd-item.flip p { padding: 0; font-size: 16px; }
+    .mmd-offer-head .sale, .mmd-offer-head .deal { font-size: 30px; }
+    .mmd-offer { grid-template-columns: 1fr; }
+    .mmd-offer .mmd-offer-img { order: -1; }
+    .mmd-box { padding: 22px 18px 18px; }
+    .mmd-box .brand, .mmd-box .prod { font-size: 26px; }
+    .mmd-disc { line-height: 1.8; }
+  }
+  .mmd-spacer { height: 76px; }
+</style>
+<div class="mmd">
+
+  <header class="mmd-wrap mmd-head">
+    <h1 class="mmd-title">Dermatologists Shocked: This Korean Pharmacy Cream Can Reduce Years Off Aging Skin. Here's 7 Reasons Why.</h1>
+    <p class="mmd-byline">By Emma Taylor<span>|</span>December 13, 2025<span>|</span>10:35 am EST</p>
+    <!-- Hero (mobile only) — product shot from your store -->
+    <a class="mmd-hero" href="https://micromd.store/products/micromd-%E2%84%A2-anti-aging-cream"><img src="https://cdn.shopify.com/s/files/1/0769/2858/1767/files/hf_20261112_192357_412b599d-ab18-457c-85c9-5553b4cf2b37.png?v=1794512146&width=1000" alt="MicroMD Time Reverse Cream"></a>
+  </header>
+
+  <main class="mmd-wrap">
+    <p class="mmd-intro">Every morning, millions of women look in the mirror hoping to see the face from 10 years ago — but see deepening lines, sagging skin, and dark spots instead. However, a pharmaceutical-grade cream that's sold 10 million tubes in Korea is helping women actually reverse these signs, with some avoiding Botox and procedures entirely.</p>
+
+    <section class="mmd-item">
+      <h2>1. Erases "Tired Eyes" in Weeks</h2>
+      <!-- Reason 1 image -->
+      <img class="mmd-img" src="https://gregval812-web.github.io/MicroMD-/images/tired-eyes.webp" alt="Reduced lines around the eyes" loading="lazy">
+      <p>You know the ones - the lines that make people ask if you're okay even when you've slept 8 hours. Clinical studies show 137% reduction in wrinkle depth. Your reflection will finally match how young you feel inside.</p>
+    </section>
+
+    <section class="mmd-item flip">
+      <h2>2. Fixes Crepey Neck Skin</h2>
+      <!-- Reason 2 image -->
+      <img class="mmd-img" src="https://gregval812-web.github.io/MicroMD-/images/crepey-neck.webp" alt="Smoother neck skin" loading="lazy">
+      <p>That delicate, papery skin texture that scarves can't always hide? The pharmaceutical-grade Centella Asiatica and collagen complex actually rebuilds skin density. Wear that open neckline again with confidence.</p>
+    </section>
+
+    <section class="mmd-item">
+      <h2>3. Restores Your Skin's "Bounce"</h2>
+      <!-- Reason 3 image -->
+      <img class="mmd-img" src="https://gregval812-web.github.io/MicroMD-/images/skin-bounce.webp" alt="Firmer, more elastic skin" loading="lazy">
+      <p>You press your skin and it just... stays there. Loss of elasticity ages you more than wrinkles. This cream's elastin and protein complex (absorbs 251% faster) restores that youthful snap-back you thought was gone forever.</p>
+    </section>
+
+    <section class="mmd-item flip">
+      <h2>4. Fades Dark Spots &amp; Old Scars</h2>
+      <!-- Reason 4 image -->
+      <img class="mmd-img" src="https://gregval812-web.github.io/MicroMD-/images/dark-spots.webp" alt="Faded dark spots" loading="lazy">
+      <p>Originally developed as medical-grade scar treatment since the 1970s, this doesn't just cover damage - it reverses it. Watch those dark marks and old scars fade like they never existed.</p>
+    </section>
+
+    <section class="mmd-item">
+      <h2>5. Transforms Rough, Dry Texture</h2>
+      <!-- Reason 5 image -->
+      <img class="mmd-img" src="https://cdn.shopify.com/s/files/1/0769/2858/1767/files/5fac7d78-4a97-43de-a125-6360867f88a8.jpg?v=1794512202&width=1000" alt="Smooth glass-skin texture" loading="lazy">
+      <p>That rough, dry texture that makes makeup sit wrong? The hyaluronic acid and nutrient blend creates glass skin - the smooth, poreless look Korean women are famous for.</p>
+    </section>
+
+    <section class="mmd-item flip">
+      <h2>6. Cheaper than invasive alternatives (Works Better Than $300 Creams)</h2>
+      <!-- Reason 6 image -->
+      <img class="mmd-img" src="https://gregval812-web.github.io/MicroMD-/images/cheaper-alternatives.webp" alt="Visible lifting results" loading="lazy">
+      <p>Skip the expensive skincare. Women are calling this their "Beauty must-have" because it actually delivers visible lifting. Professional results without insulting prices.</p>
+    </section>
+
+    <section class="mmd-item">
+      <h2>7. It Sells Out Everywhere (Even in Korea)</h2>
+      <!-- Reason 7 image -->
+      <img class="mmd-img" src="https://gregval812-web.github.io/MicroMD-/images/sells-out-korea.webp" alt="Sold out in Korean pharmacies" loading="lazy">
+      <p>When I went to Korea to find this cream, every pharmacy was sold out. That's what happens when 10 million tubes later, word spreads that something actually works. Smart women are buying 3-4 tubes because once it's gone, you're out of luck until you fly to Korea.</p>
+    </section>
+
+    <div class="mmd-offer-head">
+      <p class="sale">Black Friday Sale</p>
+      <p class="deal">Buy 2 Get 1 Free!</p>
+    </div>
+
+    <div class="mmd-offer">
+      <div class="mmd-box">
+        <p class="bogo">BUY 2 GET 1 FREE</p>
+        <div class="mmd-stars"><span class="s" aria-hidden="true">★★★★★</span><span>Rated 4.8 out of 5</span></div>
+        <p class="brand">MicroMD</p>
+        <p class="prod">Time Reverse Cream</p>
+        <a class="mmd-btn" href="https://micromd.store/products/micromd-%E2%84%A2-anti-aging-cream">Check Availability</a>
+        <div class="mmd-risk">Sell-out Risk: <b class="hi">Very High</b><span class="sep">|</span><b>FREE</b> Shipping</div>
+        <p class="mmd-guar">Try it today with a 90-Day Money Back Guarantee!</p>
+      </div>
+      <!-- Offer image — "Why Women Love MicroMD" from your store -->
+      <a class="mmd-offer-img" href="https://micromd.store/products/micromd-%E2%84%A2-anti-aging-cream"><img src="https://cdn.shopify.com/s/files/1/0769/2858/1767/files/hf_20261112_194521_303c87fe-a621-49a4-b484-a5797ab99bea.png?v=1794512861&width=1000" alt="Why women love MicroMD Time Reverse" loading="lazy"></a>
+    </div>
+  </main>
+
+  <p class="mmd-disc">DISCLAIMER: Individual results may vary. The results and claims presented on this page are based on internal consumer perception studies and individual testimonials. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. The clinical study results referenced represent data from controlled testing environments and individual results may differ. Before and after images are from actual customers but do not guarantee similar outcomes for all users. Always perform a patch test before using new skincare products. If you have sensitive skin or existing skin conditions, consult with a dermatologist before use.</p>
+
+  <div class="mmd-spacer"></div>
+  <div class="mmd-sticky"><a href="https://micromd.store/products/micromd-%E2%84%A2-anti-aging-cream">Check Availability</a></div>
+</div>
