@@ -91,15 +91,15 @@
 
   /* 4. Compare */
   .mmdp-cmp h2 { font-size: 32px; font-weight: 700; text-align: center; }
-  .mmdp-table { display: grid; grid-template-columns: 1fr 1fr 1fr; max-width: 460px; margin: 24px auto 0; font-size: 15px; }
-  .mmdp-table > div { padding: 22px 10px; min-height: 70px; display: flex; align-items: center; border-bottom: 1px solid var(--line); line-height: 1.35; }
-  .mmdp-table .lab { font-weight: 600; padding-left: 16px; }
+  .mmdp-table { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; width: 100%; max-width: 460px; margin: 24px auto 0; font-size: clamp(12px, 3.8vw, 15px); }
+  .mmdp-table > div { min-width: 0; padding: 20px clamp(4px, 2vw, 10px); min-height: 70px; display: flex; align-items: center; border-bottom: 1px solid var(--line); line-height: 1.35; overflow-wrap: break-word; word-break: normal; hyphens: manual; margin: 0; box-sizing: border-box; }
+  .mmdp-table .lab { font-weight: 600; padding-left: clamp(8px, 3vw, 16px) !important; }
   .mmdp-table .us { background: var(--red-strong); color: #fff; justify-content: center; text-align: center; font-weight: 500; border-bottom-color: rgba(255,255,255,.18); }
   .mmdp-table .them { justify-content: center; text-align: center; }
-  .mmdp-table .head { flex-direction: column; justify-content: flex-end; border-bottom: 0; font-size: 13px; padding: 14px 6px 12px; font-weight: 700; text-align: center; gap: 8px; }
+  .mmdp-table .head { flex-direction: column; justify-content: flex-end; border-bottom: 0; font-size: clamp(11px, 3.3vw, 13px); padding: 14px 4px 12px; font-weight: 700; text-align: center; gap: 8px; }
   .mmdp-table .head.us { border-radius: 8px 8px 0 0; padding-top: 16px; }
-  .mmdp-table .head img { height: 96px; width: auto; }
-  .mmdp-table .head.us img { background: #fff; border-radius: 6px; padding: 4px 10px; }
+  .mmdp-table .head img { height: clamp(70px, 22vw, 96px); width: auto; max-width: 100%; object-fit: contain; }
+  .mmdp-table .head.us img { background: #fff; border-radius: 6px; padding: 4px 8px; }
   .mmdp-table .last { border-radius: 0 0 8px 8px; }
   .mmdp-table .lab.first { border-top: 1px solid var(--line); border-top-left-radius: 8px; }
   .mmdp-table .them.first { border-top: 1px solid var(--line); border-top-right-radius: 8px; }
@@ -244,11 +244,13 @@
   <!-- 5. Results -->
   <section>
     <img class="mmdp-stats" src="https://gregval812-web.github.io/MicroMD-/product/images/results-stats.svg" alt="94% noticed their skin appeared healthier and more radiant. 88% saw their skin feel firmer and visibly lifted. 83% noticed their skin felt smoother with fewer wrinkles." loading="lazy">
-    <img class="mmdp-wrinkle" src="https://gregval812-web.github.io/MicroMD-/product/images/visible-wrinkle-reduction.webp" alt="Visible wrinkle reduction: before and 4 weeks after use" loading="lazy">
   </section>
   <section class="mmdp-sec mmdp-clin center">
     <h2>Clinically Proven Results</h2>
     <p class="lead">Studies show visible improvements in wrinkle count, size, and depth after consistent use.</p>
+  </section>
+  <section>
+    <img class="mmdp-wrinkle" src="https://gregval812-web.github.io/MicroMD-/product/images/visible-wrinkle-reduction.webp" alt="Visible wrinkle reduction: before and 4 weeks after use" loading="lazy">
   </section>
 
   <!-- 6. FAQ -->
@@ -264,13 +266,6 @@
       <div class="a"><p>No added fragrance. The MicroMD formula is nearly odorless, with only a very light, natural scent from centella and botanical oils that fades quickly upon application.</p></div></details>
     <details><summary><span class="q">?</span><span class="t">Do I need other products with this cream?</span></summary>
       <div class="a"><p>The MicroMD™ Time Reverse Cream targets fine lines, wrinkles, dark spots, loss of firmness, and dullness all at once. Therefore, complicated routines are not needed! The cream works beautifully on its own and easily layers into your current skincare routine. Many users find this is the only cream they need for visible, youthful-looking results and radiant, glowing skin. Just cleanse, apply, and enjoy the results!</p></div></details>
-    <details><summary><span class="q">?</span><span class="t">Manage your subscription</span></summary>
-      <div class="a">
-        <p>The MicroMD™ Time Reverse Cream is available as either a one-time purchase or as part of an optional subscription. Customers can choose their preferred option at the time of purchase.</p>
-        <p>If you choose the subscription option, you will receive a discounted price on your initial order, and this same discounted price will apply to all future recurring deliveries.</p>
-        <p>If you enrolled in a subscription for the MicroMD™ Time Reverse Cream, it means the subscription option was clearly presented during your purchase. All recurring charges are billed every 30 days, and we will ship the same quantity of products that you initially purchased with each recurring order. Please allow standard shipping times from the moment you are charged until your recurring order arrives.</p>
-        <p>You can cancel at any time by visiting your online portal under the “Subscription Management” tab on our store, using the “Manage Your Subscription” link in your order or billing emails, or by contacting our support team, who will be happy to assist.</p>
-      </div></details>
   </section>
 
 </div>
