@@ -133,6 +133,14 @@
   @media (min-width: 900px) {
     .mmdp-rev { max-width: 560px; }
   }
+  /* Shield against Shopify theme styles (caps, theme fonts, centered text, light weights) */
+  .mmdp { font-weight: 400; }
+  .mmdp, .mmdp * { font-family: Montserrat, sans-serif !important; text-transform: none !important; letter-spacing: normal !important; text-align: left !important; }
+  .mmdp .center, .mmdp .center *, .mmdp .mmdp-cmp h2, .mmdp .mmdp-faq h2, .mmdp .mmdp-rev h2, .mmdp .mmdp-dots,
+  .mmdp .mmdp-table .us, .mmdp .mmdp-table .them, .mmdp .mmdp-table .head, .mmdp .mmdp-tabs button { text-align: center !important; }
+  .mmdp .mmdp-tabs button, .mmdp .mmdp-panel h3 { text-transform: uppercase !important; }
+  .mmdp p, .mmdp li, .mmdp q, .mmdp .lead { font-weight: 400; }
+  .mmdp h2, .mmdp h3 { font-style: normal !important; }
   /* Guard against Shopify theme styles */
   .mmdp .mmdp-arrow, .mmdp .mmdp-dots button, .mmdp .mmdp-tabs button { -webkit-appearance: none !important; appearance: none !important; min-width: 0 !important; min-height: 0 !important; margin: 0 !important; line-height: 1 !important; text-indent: 0 !important; letter-spacing: normal !important; box-sizing: border-box !important; }
   .mmdp .mmdp-arrow { position: absolute !important; display: grid !important; width: 40px !important; height: 40px !important; padding: 0 !important; border: 0 !important; border-radius: 50% !important; background: rgba(255,255,255,.92) !important; }
