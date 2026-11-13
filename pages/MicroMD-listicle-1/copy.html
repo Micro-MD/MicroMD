@@ -21,13 +21,20 @@ textarea{width:100%;box-sizing:border-box;height:340px;margin-top:14px;border:1p
 <p>One tap copies everything you need.</p>
 <button class="btn" id="copy" type="button">Copy code</button>
 <ol style="margin-top:18px">
-<li>In Shopify, go to <b>Online Store &rarr; Pages &rarr; Add page</b>. Title: <b>MicroMD listicle 1</b>.</li>
-<li>Under <b>Search engine listing</b>, click edit and set the URL handle to <b>micromd-listicle-1</b>. Save.</li>
-<li>Go to <b>Online Store &rarr; Themes &rarr; Customize</b>. In the top dropdown pick <b>Pages &rarr; Create template</b>, name it <b>listicle</b>.</li>
-<li>In that template, remove the default page section, then <b>Add section &rarr; Custom Liquid</b>. Paste the code and <b>Save</b>.</li>
-<li>Back on your page, set <b>Theme template</b> to <b>listicle</b> and save. Your page is now at micromd.store/pages/micromd-listicle-1.</li>
+<li>Shopify admin &rarr; <b>Online Store &rarr; Themes &rarr; Customize</b>.</li>
+<li>Top dropdown (says "Home page") &rarr; <b>Pages &rarr; Create template</b>. Name it <b>listicle</b>, based on Default page &rarr; <b>Create</b>.</li>
+<li>In the left panel, click each existing section in the template &rarr; <b>Remove section</b>.</li>
+<li><b>Add section &rarr; Custom Liquid</b>. Paste the code into the box &rarr; <b>Save</b>.</li>
+<li>Shopify admin &rarr; <b>Online Store &rarr; Pages &rarr; Add page</b>. Title: <b>MicroMD Listicle 1</b>. Leave the content empty.</li>
+<li>On the right, set <b>Theme template</b> to <b>listicle</b>. At the bottom, under <b>Search engine listing &rarr; Edit</b>, set the URL handle to <b>micromd-listicle-1</b>. Make sure it's <b>Visible</b> &rarr; <b>Save</b>.</li>
+<li>Open <b>micromd.store/pages/micromd-listicle-1</b>. The store header and footer are hidden on this page only.</li>
 </ol>
 <textarea id="code" readonly spellcheck="false">&lt;style&gt;
+  /* Hide the store header, announcement bar, footer and popups on this page only */
+  #shopify-section-header, #shopify-section-footer, #shopify-section-footer-promotions,
+  #shopify-section-newsletter-popup, .announcement-bar, .header-wrapper, .site-footer { display: none !important; }
+&lt;/style&gt;
+&lt;style&gt;
   @import url(&quot;https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap&quot;);
   .mmd, .mmd * { box-sizing: border-box; }
   .mmd {
